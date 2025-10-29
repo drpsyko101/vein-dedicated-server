@@ -32,7 +32,7 @@ This image primarily uses environment variables to set the game configurations.
 | `VEIN_MAX_PLAYERS`                    |                `16`                 | Max player amount.                                                                                      |
 | `SUPER_ADMIN_STEAM_IDS`               |              _(none)_               | Server super admin Steam IDs, separated by comma (`,`).                                                 |
 | `ADMIN_STEAM_IDS`                     |              _(none)_               | Server admin Steam IDs, separated by comma (`,`).                                                       |
-| `VEIN_HUNGER_MULTIPLIER`              |                 1.0                 | How much faster or slower you get thirsty.                                                              |
+| `VEIN_HUNGER_MULTIPLIER`              |                `1.0`                | How much faster or slower you get thirsty.                                                              |
 | `VEIN_MAX_THIRD_PERSON_DISTANCE`      |                `400`                | How far out the camera can zoom. Set to `0` to disable third-person. Default is 400.                    |
 | `VEIN_SHOW_SCOREBOARD_BADGES`         |                `1.0`                | Enable or disable admin badges on the scoreboard. If this is off, nobody can tell who is an admin.      |
 | `VEIN_THIRST_MULTIPLIER`              |                `1.0`                | How much faster or slower you get thirsty.                                                              |
