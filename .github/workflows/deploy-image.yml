@@ -22,3 +22,8 @@ jobs:
           push: true
           tags: drpsyko101/vein-dedicated-server:latest
           labels: ${{ github.sha }}
+      - name: Docker Hub Description
+        uses: peter-evans/dockerhub-description@v5
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
