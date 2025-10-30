@@ -61,7 +61,7 @@ set -e
 : "${VEIN_ZOMBIE_SPEED_MULTIPLIER:=1.0}"
 : "${VEIN_ZOMBIE_WALKER_PERCENTAGE:=0.8}"
 : "${VEIN_ZOMBIE_WALK_SPEED_MULTIPLIER:=1.0}"
-: "${VEIN_CONSOLE_VARIABLES:=}"
+: "${ADDITIONAL_CONSOLE_VARIABLES:=}"
 
 STEAMCMD_DIR="/home/steam/steamcmd"
 EXPERIMENTAL_FLAG=$( [ "$VEIN_EXPERIMENTAL" -eq 1 ] && echo " -beta experimental " || echo "" )
@@ -185,7 +185,7 @@ if ! grep -q "\[ConsoleVariables\]" "$ENGINEINI"; then
   echo "[ConsoleVariables]" >> "$ENGINEINI"
 fi
 
-for var in ${VEIN_CONSOLE_VARIABLES//,/ }; do
+for var in ${ADDITIONAL_CONSOLE_VARIABLES//,/ }; do
   if ! grep -q "${var%%=*}" "$ENGINEINI"; then
     sed -i "/\[ConsoleVariables\]/a $var" "$ENGINEINI"
   else

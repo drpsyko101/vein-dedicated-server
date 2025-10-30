@@ -80,4 +80,4 @@ This image primarily uses environment variables to set the game configurations.
 | `VEIN_ZOMBIE_SPEED_MULTIPLIER`        |                `1.0`                | Base zombies speed rate.                                                                                |
 | `VEIN_ZOMBIE_WALKER_PERCENTAGE`       |                `0.8`                | How many zombies are walkers.                                                                           |
 | `VEIN_ZOMBIE_WALK_SPEED_MULTIPLIER`   |                `1.0`                | How much faster walking zombies are.                                                                    |
-| `VEIN_CONSOLE_VARIABLES`              |              _(none)_               | Additional game console variable, in key value format separated by comma (`,`)(i.e. `foo=a,bar=b`).     |
+| `ADDITIONAL_CONSOLE_VARIABLES`        |              _(none)_               | Additional game console variable, in key value format separated by comma (i.e. `foo=a,bar=b`).          |
