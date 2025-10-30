@@ -26,10 +26,10 @@ This image primarily uses environment variables to set the game configurations.
 | `GAMEDIR`                             | `/home/steam/vein-dedicated-server` | Game installation directory.                                                                            |
 | `GAME_PORT`                           |               `7777`                | Main game UDP port.                                                                                     |
 | `QUERY_PORT`                          |               `27015`               | Steamwork query TCP port.                                                                               |
-| `VEIN_SERVER_NAME`                    |            `Vein Server`            | Server name.                                                                                            |
-| `VEIN_SERVER_DESCRIPTION`             |      `Welcome to Vein Server!`      | Server description.                                                                                     |
-| `VEIN_PASSWORD`                       |              _(none)_               | Server password.                                                                                        |
-| `VEIN_MAX_PLAYERS`                    |                `16`                 | Max player amount.                                                                                      |
+| `SERVER_NAME`                         |            `Vein Server`            | Server name.                                                                                            |
+| `SERVER_DESCRIPTION`                  |      `Welcome to Vein Server!`      | Server description.                                                                                     |
+| `PASSWORD`                            |              _(none)_               | Server password.                                                                                        |
+| `MAX_PLAYERS`                         |                `16`                 | Max player amount.                                                                                      |
 | `SUPER_ADMIN_STEAM_IDS`               |              _(none)_               | Server super admin Steam IDs, separated by comma (`,`).                                                 |
 | `ADMIN_STEAM_IDS`                     |              _(none)_               | Server admin Steam IDs, separated by comma (`,`).                                                       |
 | `VEIN_HUNGER_MULTIPLIER`              |                `1.0`                | How much faster or slower you get thirsty.                                                              |
@@ -80,3 +80,4 @@ This image primarily uses environment variables to set the game configurations.
 | `VEIN_ZOMBIE_SPEED_MULTIPLIER`        |                `1.0`                | Base zombies speed rate.                                                                                |
 | `VEIN_ZOMBIE_WALKER_PERCENTAGE`       |                `0.8`                | How many zombies are walkers.                                                                           |
 | `VEIN_ZOMBIE_WALK_SPEED_MULTIPLIER`   |                `1.0`                | How much faster walking zombies are.                                                                    |
+| `VEIN_CONSOLE_VARIABLES`              |              _(none)_               | Additional game console variable, in key value format separated by comma (`,`)(i.e. `foo=a,bar=b`).     |

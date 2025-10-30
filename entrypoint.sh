@@ -7,10 +7,10 @@ set -e
 : "${VEIN_EXPERIMENTAL:=0}"
 : "${GAME_PORT:=7777}"
 : "${QUERY_PORT:=27015}"
-: "${VEIN_SERVER_NAME:=Vein Server}"
-: "${VEIN_SERVER_DESCRIPTION:=Welcome to Vein Server!}"
-: "${VEIN_PASSWORD:=}"
-: "${VEIN_MAX_PLAYERS:=16}"
+: "${SERVER_NAME:=Vein Server}"
+: "${SERVER_DESCRIPTION:=Welcome to Vein Server!}"
+: "${PASSWORD:=}"
+: "${MAX_PLAYERS:=16}"
 : "${SUPER_ADMIN_STEAM_IDS:=}"
 : "${ADMIN_STEAM_IDS:=}"
 : "${VEIN_HUNGER_MULTIPLIER:=1.0}"
@@ -61,6 +61,7 @@ set -e
 : "${VEIN_ZOMBIE_SPEED_MULTIPLIER:=1.0}"
 : "${VEIN_ZOMBIE_WALKER_PERCENTAGE:=0.8}"
 : "${VEIN_ZOMBIE_WALK_SPEED_MULTIPLIER:=1.0}"
+: "${VEIN_CONSOLE_VARIABLES:=}"
 
 STEAMCMD_DIR="/home/steam/steamcmd"
 EXPERIMENTAL_FLAG=$( [ "$VEIN_EXPERIMENTAL" -eq 1 ] && echo " -beta experimental " || echo "" )
@@ -103,10 +104,12 @@ mkdir -p ~/.steam/sdk64
 ln -sf $STEAMCLIENT_PATH ~/.steam/sdk64/steamclient.so
 
 # Setup Game.ini
+echo "Setting up game configurations..."
 CONFIG_DIR="$GAMEDIR/Vein/Saved/Config/LinuxServer"
 mkdir -p "$CONFIG_DIR"
-rm -f "$CONFIG_DIR/Game.ini"
-cat > "$CONFIG_DIR/Game.ini" <<EOL
+GAMEINI="$CONFIG_DIR/Game.ini"
+rm -f "$GAMEINI"
+cat > "$GAMEINI" <<EOL
 [/Script/Vein.ServerSettings]
 GS_HungerMultiplier=$VEIN_HUNGER_MULTIPLIER
 GS_MaxThirdPersonDistance=$VEIN_MAX_THIRD_PERSON_DISTANCE
@@ -158,13 +161,37 @@ GS_ZombieWalkerPercentage=$VEIN_ZOMBIE_WALKER_PERCENTAGE
 GS_ZombieWalkSpeedMultiplier=$VEIN_ZOMBIE_WALK_SPEED_MULTIPLIER
 
 [/Script/Vein.VeinGameSession]
-ServerName=$VEIN_SERVER_NAME
-ServerDescription=$VEIN_SERVER_DESCRIPTION
-Password=$VEIN_SERVER_PASSWORD
-SuperAdminSteamIDs=$SUPER_ADMIN_STEAM_IDS
-AdminSteamIDs=$ADMIN_STEAM_IDS
-MaxPlayers=$VEIN_MAX_PLAYERS
+ServerName=$SERVER_NAME
+ServerDescription=$SERVER_DESCRIPTION
+Password=$SERVER_PASSWORD
+MaxPlayers=$MAX_PLAYERS
 EOL
+
+for id in ${SUPER_ADMIN_STEAM_IDS//,/ }; do
+  echo "SuperAdminSteamIDs=$id" >> "$CONFIG_DIR/Game.ini"
+done
+
+for id in ${ADMIN_STEAM_IDS//,/ }; do
+  echo "AdminSteamIDs=$id" >> "$CONFIG_DIR/Game.ini"
+done
+
+# Setup Engine.ini
+ENGINEINI="$CONFIG_DIR/Engine.ini"
+if [ ! -f "$ENGINEINI" ]; then
+  touch "$ENGINEINI"
+fi
+
+if ! grep -q "\[ConsoleVariables\]" "$ENGINEINI"; then
+  echo "[ConsoleVariables]" >> "$ENGINEINI"
+fi
+
+for var in ${VEIN_CONSOLE_VARIABLES//,/ }; do
+  if ! grep -q "${var%%=*}" "$ENGINEINI"; then
+    sed -i "/\[ConsoleVariables\]/a $var" "$ENGINEINI"
+  else
+    sed -i "s/${var%%=*}=.*/${var}/" "$ENGINEINI"
+  fi
+done
 
 # Start the Vein Dedicated Server with logging enabled
 ./VeinServer.sh -log -Port=$GAME_PORT -QueryPort=$QUERY_PORT "$@"
