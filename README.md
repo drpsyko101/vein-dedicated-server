@@ -28,7 +28,7 @@ This image primarily uses environment variables to set the game configurations.
 | `QUERY_PORT`                          |               `27015`               | Steamwork query TCP port.                                                                               |
 | `SERVER_NAME`                         |            `Vein Server`            | Server name.                                                                                            |
 | `SERVER_DESCRIPTION`                  |      `Welcome to Vein Server!`      | Server description.                                                                                     |
-| `PASSWORD`                            |              _(none)_               | Server password.                                                                                        |
+| `SERVER_PASSWORD`                     |              _(none)_               | Server password.                                                                                        |
 | `MAX_PLAYERS`                         |                `16`                 | Max player amount.                                                                                      |
 | `SUPER_ADMIN_STEAM_IDS`               |              _(none)_               | Server super admin Steam IDs, separated by comma (`,`).                                                 |
 | `ADMIN_STEAM_IDS`                     |              _(none)_               | Server admin Steam IDs, separated by comma (`,`).                                                       |

@@ -9,7 +9,7 @@ set -e
 : "${QUERY_PORT:=27015}"
 : "${SERVER_NAME:=Vein Server}"
 : "${SERVER_DESCRIPTION:=Welcome to Vein Server!}"
-: "${PASSWORD:=}"
+: "${SERVER_PASSWORD:=}"
 : "${MAX_PLAYERS:=16}"
 : "${SUPER_ADMIN_STEAM_IDS:=}"
 : "${ADMIN_STEAM_IDS:=}"
