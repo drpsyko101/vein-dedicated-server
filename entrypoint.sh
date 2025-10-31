@@ -4,7 +4,7 @@ set -e
 
 # Set default values from context
 : "${GAMEDIR:=$HOME/vein-dedicated-server}"
-: "${VEIN_EXPERIMENTAL:=0}"
+: "${BETA_CHANNEL:=}"
 : "${GAME_PORT:=7777}"
 : "${QUERY_PORT:=27015}"
 : "${SERVER_NAME:=Vein Server}"
@@ -64,7 +64,10 @@ set -e
 : "${ADDITIONAL_CONSOLE_VARIABLES:=}"
 
 STEAMCMD_DIR="/home/steam/steamcmd"
-EXPERIMENTAL_FLAG=$( [ "$VEIN_EXPERIMENTAL" -eq 1 ] && echo " -beta experimental " || echo "" )
+BETA_ARG=""
+if [ ! -z "$BETA_CHANNEL" ]; then
+  BETA_ARG="-beta $BETA_CHANNEL"
+fi
 
 log_error() {
   local err_msg="${1:-Unknown error}"
@@ -90,7 +93,7 @@ if [ ! -w "$GAMEDIR" ]; then
   log_error "Directory $GAMEDIR is not writable by $(whoami)." 2
 fi
 echo "Installing/Updating Vein Dedicated Server to $GAMEDIR"
-"${STEAMCMD_DIR}/steamcmd.sh" +force_install_dir "$GAMEDIR" +login anonymous +app_update 2131400 validate +quit || {
+"${STEAMCMD_DIR}/steamcmd.sh" +force_install_dir "$GAMEDIR" +login anonymous +app_update 2131400 $BETA_ARG validate +quit || {
   log_error "Failed to install Vein Dedicated Server." 3
 }
 cd "$GAMEDIR" || exit 1

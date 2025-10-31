@@ -1,0 +1,12 @@
+services:
+  vein:
+    env_file:
+      - .env.example
+    image: drpsyko101/vein-dedicated-server
+    ports:
+      - "7777:${GAME_PORT:-7777}/udp"
+    volumes:
+      - data:/home/steam/vein-dedicated-server
+
+volumes:
+  data:

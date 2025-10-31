@@ -24,6 +24,7 @@ This image primarily uses environment variables to set the game configurations.
 | Variable                              |                Value                | Description                                                                                             |
 | ------------------------------------- | :---------------------------------: | ------------------------------------------------------------------------------------------------------- |
 | `GAMEDIR`                             | `/home/steam/vein-dedicated-server` | Game installation directory.                                                                            |
+| `BETA_CHANNEL`                        |              _(none)_               | Select specific beta branch build. Leave empty to use the default branch.                               |
 | `GAME_PORT`                           |               `7777`                | Main game UDP port.                                                                                     |
 | `QUERY_PORT`                          |               `27015`               | Steamwork query TCP port.                                                                               |
 | `SERVER_NAME`                         |            `Vein Server`            | Server name.                                                                                            |
