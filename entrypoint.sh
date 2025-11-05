@@ -93,7 +93,7 @@ if [ ! -w "$GAMEDIR" ]; then
   log_error "Directory $GAMEDIR is not writable by $(whoami)." 2
 fi
 echo "Installing/Updating Vein Dedicated Server to $GAMEDIR"
-rm -f "$GAMEDIR/steamapps/*.acf"
+rm -f "$GAMEDIR/steamapps/appmanifest_2131400.acf"
 "${STEAMCMD_DIR}/steamcmd.sh" +force_install_dir "$GAMEDIR" +login anonymous +app_update 2131400 $BETA_ARG validate +quit || {
   log_error "Failed to install Vein Dedicated Server." 3
 }
